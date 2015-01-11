@@ -1,0 +1,9 @@
+[submodule "3rd/rpi-gpoi"]
+	path = 3rd/rpi-gpoi
+	url = https://github.com/yingnierxiao/rpi-gpio.git
+[submodule "skynet"]
+	path = skynet
+	url = https://github.com/cloudwu/skynet.git
+[submodule "3rd/wiringPi"]
+	path = 3rd/wiringPi
+	url = https://github.com/yingnierxiao/wiringPi.git
