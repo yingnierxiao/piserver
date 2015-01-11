@@ -1,0 +1,2 @@
+# piserver
+use skyent
