@@ -10,15 +10,23 @@ local client_fd
 
 local carServer 
 
-local function send_client(v)
-	socket.write(client_fd, netpack.pack(jsonpack.pack(0, {true, v})))
+local function send_package(pack)
+	local size = #pack
+	local package = string.char(bit32.extract(size,8,8)) ..
+		string.char(bit32.extract(size,0,8))..
+		pack
+
+	socket.send(client_fd, package)
 end
+
 
 
 skynet.register_protocol {
 	name = "client",
 	id = skynet.PTYPE_CLIENT,
-	unpack =function ( ... ) return protopack.pbcunpack(...) end ,
+	unpack =function ( msg ,size ) 
+		return msg:byte(1)*256 +msg:byte(2),msg:sub(3,#msg-2) ,#msg-2
+	end ,
 	dispatch = function (session, address, pid,text,size)
 		carServer.post.dir(pid,text)
 	end
