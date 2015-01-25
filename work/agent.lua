@@ -16,8 +16,7 @@ local client_fd
 local carServer 
 
 function REQUEST:dir()
-	print("dir", self.side,self.dir)
-	carServer.post(self.side,self.dir)
+	carServer.post.dir(self.side,self.dir)
 end
 
 local function send_package(pack)
@@ -30,7 +29,6 @@ local function send_package(pack)
 end
 
 local function request(name, args, response)
-	print(name,args)
 	local f = assert(REQUEST[name])
 	local r = f(args)
 	if response then
