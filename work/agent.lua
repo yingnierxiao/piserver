@@ -2,16 +2,23 @@ local skynet = require "skynet"
 local netpack = require "netpack"
 local socket = require "socket"
 local snax = require "snax"
+local core = require "sproto.core"
 
 local sproto = require "sproto"
 local bit32 = require "bit32"
 
 local host
 local CMD = {}
+local REQUEST = {}
 
 local client_fd
 
 local carServer 
+
+function REQUEST:dir()
+	print("get", self.side,self.dir)
+	carServer.post(self.side,self.dir)
+end
 
 local function send_package(pack)
 	local size = #pack
@@ -20,6 +27,14 @@ local function send_package(pack)
 		pack
 
 	socket.send(client_fd, package)
+end
+
+local function request(name, args, response)
+	local f = assert(REQUEST[name])
+	local r = f(args)
+	if response then
+		return response(r)
+	end
 end
 
 
@@ -56,9 +71,6 @@ function CMD.start(gate , fd ,addr)
 			skynet.sleep(500)
 		end
 	end)
-
-
-	
 	client_fd = fd
 	skynet.call(gate, "lua", "forward", fd)
 

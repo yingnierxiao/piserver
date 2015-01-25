@@ -14,12 +14,10 @@ handshake 1 {
 	}
 }
 
-get 2 {
+dir 2 {
 	request {
-		what 0 : string
-	}
-	response {
-		result 0 : string
+		side 0 : integer
+		dir 1 : integer
 	}
 }
 

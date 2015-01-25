@@ -147,11 +147,8 @@ function Car:stop( )
     end
 end
 
-function accept.dir(pid,dir )
-    pid = tonumber(pid)
-    dir = tonumber(dir)
-
-    if pid ==1 then 
+function accept.dir(side,dir )
+    if side ==1 then 
         if dir == 0 then                    --DEFAULT = 0, 
             wifiCar.xspeed = 0
         elseif dir == 1 then                --D_UP = 1,
