@@ -2,6 +2,7 @@ local skynet = require "skynet"
 local netpack = require "netpack"
 local socket = require "socket"
 local snax = require "snax"
+local core = require "sproto.core"
 
 local CMD = {}
 
@@ -23,7 +24,9 @@ end
 skynet.register_protocol {
 	name = "client",
 	id = skynet.PTYPE_CLIENT,
-	unpack =function ( msg ,size ) 
+	unpack =function ( ... )
+		local msg = core.unpack(...)
+		--print(msg:byte(1)*256+msg:byte(2),msg:sub(3,#msg-2)) 
 		return msg:byte(1)*256 +msg:byte(2),msg:sub(3,#msg-2) ,#msg-2
 	end ,
 	dispatch = function (session, address, pid,text,size)

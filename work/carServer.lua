@@ -148,8 +148,10 @@ function Car:stop( )
 end
 
 function accept.dir(pid,dir )
-    pid = tonumber(pid)
-    dir = tonumber(dir)
+	print(type(pid),type(dir))
+    
+    	dir = dir:byte(1)*256+dir:byte(2)
+	print(pid,dir)	
 
     if pid ==1 then 
         if dir == 0 then                    --DEFAULT = 0, 
