@@ -1,4 +1,4 @@
-package.path = "./examples/?.lua;" .. package.path
+package.path = "./work/?.lua;" .. package.path
 
 local skynet = require "skynet"
 local netpack = require "netpack"
@@ -10,7 +10,7 @@ local gate
 local agent = {}
 
 function SOCKET.open(fd, addr)
-	skynet.error("New client from : " .. addr)
+	skynet.error("New client from : " .. addr,proto)
 	agent[fd] = skynet.newservice("agent")
 	skynet.call(agent[fd], "lua", "start", gate, fd, proto)
 end

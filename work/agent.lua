@@ -26,10 +26,11 @@ local function send_package(pack)
 		string.char(bit32.extract(size,0,8))..
 		pack
 
-	socket.send(client_fd, package)
+	socket.write(client_fd, package)
 end
 
 local function request(name, args, response)
+	print(name,args)
 	local f = assert(REQUEST[name])
 	local r = f(args)
 	if response then
@@ -46,6 +47,7 @@ skynet.register_protocol {
 		return host:dispatch(msg, sz)
 	end,
 	dispatch = function (_, _, type, ...)
+		print(...)
 		if type == "REQUEST" then
 			local ok, result  = pcall(request, ...)
 			if ok then
@@ -62,7 +64,7 @@ skynet.register_protocol {
 	end
 }
 
-function CMD.start(gate , fd ,addr)
+function CMD.start(gate , fd ,proto)
 	host = sproto.new(proto.c2s):host "package"
 	send_request = host:attach(sproto.new(proto.s2c))
 	skynet.fork(function()
