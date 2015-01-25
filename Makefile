@@ -30,10 +30,6 @@ GPIO :
 $(MY_LUA_CLIB_PATH)/lpack.so : 3rd/lpack/lpack.c | $(MY_LUA_CLIB_PATH)
 	$(CC) $(CFLAGS) $(SHARED) $^ -o $@
 
-
-$(MY_LUA_CLIB_PATH)/protopack.so : lualib-src/ext-proto.c  | $(MY_LUA_CLIB_PATH)
-	$(CC) $(CFLAGS) $(SHARED) $^ -o $@
-
 clean :
 	cd skynet && $(MAKE) clean
 	
