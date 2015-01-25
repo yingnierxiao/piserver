@@ -27,6 +27,7 @@ skynet.register_protocol {
 		return msg:byte(1)*256 +msg:byte(2),msg:sub(3,#msg-2) ,#msg-2
 	end ,
 	dispatch = function (session, address, pid,text,size)
+		print(pid,text,size)
 		carServer.post.dir(pid,text)
 	end
 }
