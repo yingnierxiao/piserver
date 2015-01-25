@@ -62,7 +62,7 @@ skynet.register_protocol {
 	end
 }
 
-function CMD.start(gate , fd ,addr)
+function CMD.start(gate , fd ,proto)
 	host = sproto.new(proto.c2s):host "package"
 	send_request = host:attach(sproto.new(proto.s2c))
 	skynet.fork(function()
