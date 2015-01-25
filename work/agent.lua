@@ -16,7 +16,7 @@ local client_fd
 local carServer 
 
 function REQUEST:dir()
-	print("get", self.side,self.dir)
+	print("dir", self.side,self.dir)
 	carServer.post(self.side,self.dir)
 end
 
@@ -47,7 +47,6 @@ skynet.register_protocol {
 		return host:dispatch(msg, sz)
 	end,
 	dispatch = function (_, _, type, ...)
-		print(...)
 		if type == "REQUEST" then
 			local ok, result  = pcall(request, ...)
 			if ok then
