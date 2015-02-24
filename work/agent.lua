@@ -16,6 +16,7 @@ local client_fd
 local carServer 
 
 function REQUEST:dir()
+	print(self.side,self.dir)
 	carServer.post.dir(self.side,self.dir)
 end
 
