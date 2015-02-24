@@ -19,6 +19,11 @@ function REQUEST:dir()
 	carServer.post.dir(self.side,self.dir)
 end
 
+function REQUEST:handshake(pack)
+	pack.serverTime = os.time()
+	send_package(send_request("heartbeat",pack))
+end
+
 local function send_package(pack)
 	local size = #pack
 	local package = string.char(bit32.extract(size,8,8)) ..
@@ -64,12 +69,12 @@ skynet.register_protocol {
 function CMD.start(gate , fd ,proto)
 	host = sproto.new(proto.c2s):host "package"
 	send_request = host:attach(sproto.new(proto.s2c))
-	skynet.fork(function()
-		while true do
-			send_package(send_request "heartbeat")
-			skynet.sleep(500)
-		end
-	end)
+	-- skynet.fork(function()
+	-- 	while true do
+	-- 		send_package(send_request "heartbeat")
+	-- 		skynet.sleep(500)
+	-- 	end
+	-- end)
 	client_fd = fd
 	skynet.call(gate, "lua", "forward", fd)
 
