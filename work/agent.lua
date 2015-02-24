@@ -20,7 +20,7 @@ function REQUEST:dir()
 end
 
 function REQUEST:handshake()
-	send_package(send_request("handshake",{clientTime=self.clientTime,serverTime=os.time()}))
+	return {clientTime=self.clientTime,serverTime=os.time()}
 end
 
 local function send_package(pack)
