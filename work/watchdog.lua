@@ -18,6 +18,7 @@ end
 local function close_agent(fd)
 	local a = agent[fd]
 	if a then
+		skynet.call(agent[fd], "lua", "kill")
 		skynet.kill(a)
 		agent[fd] = nil
 	end

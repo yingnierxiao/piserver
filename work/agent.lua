@@ -80,6 +80,11 @@ function CMD.start(gate , fd ,proto)
 
 end
 
+function CMD.kill()
+	carServer.post.dir(1,0)
+	carServer.post.dir(2,0)
+end
+
 skynet.start(function()
 
 	carServer = snax.uniqueservice("carServer")
