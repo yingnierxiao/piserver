@@ -16,13 +16,12 @@ local client_fd
 local carServer 
 
 function REQUEST:dir()
-	print(self.side,self.dir)
 	carServer.post.dir(self.side,self.dir)
 end
 
-function REQUEST:handshake(pack)
-	pack.serverTime = os.time()
-	send_package(send_request("heartbeat",pack))
+function REQUEST:handshake()
+	self.serverTime = os.time()
+	send_package(send_request("heartbeat",self))
 end
 
 local function send_package(pack)
