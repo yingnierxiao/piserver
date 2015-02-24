@@ -9,24 +9,24 @@ proto.c2s = sprotoparser.parse [[
 }
 
 handshake 1 {
+	request {
+		clientTime 0 :integer
+	}
 	response {
-		msg 0  : string
+		clientTime 0 : integer
+		serverTime 1 : integer
 	}
 }
 
 dir 2 {
 	request {
 		side 0 : integer
-		dir 1 : integer
+		dir 1  : integer
+		time 2 : integer
+		ping 3 : integer
 	}
 }
 
-set 3 {
-	request {
-		what 0 : string
-		value 1 : string
-	}
-}
 
 ]]
 
