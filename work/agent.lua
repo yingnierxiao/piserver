@@ -21,7 +21,7 @@ end
 
 function REQUEST:handshake()
 	self.serverTime = os.time()
-	send_package(send_request("heartbeat",self))
+	send_package(send_request("handshake",self))
 end
 
 local function send_package(pack)
