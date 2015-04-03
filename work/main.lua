@@ -11,6 +11,6 @@ skynet.start(function()
 		nodelay = true,
 	})
 	print("Watchdog listen on ", 8888)
-	-- local car = snax.uniqueservice("carServer")
+	local dis = snax.uniqueservice("waveDis")
 	skynet.exit()
 end)

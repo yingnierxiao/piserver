@@ -221,7 +221,9 @@ function exit( )
 end
 
 function init( )
-    GPIO.setwarnings(false)
+    GPIO.setwarnings(true)
+    GPIO.setmode(GPIO.BOARD)  
+
     wifiCar = Car.new(false)
     wifiCar:stop()
 
