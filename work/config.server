@@ -13,7 +13,7 @@ lualoader =root.. "lualib/loader.lua"
 -- preload = "./examples/preload.lua"	-- run preload.lua before every lua service run
 snax = "./work/?.lua;"
 cpath = root.."cservice/?.so"
-daemon = "./skynet.pid"
+--daemon = "./skynet.pid"
 
 --if config self workspace 
 lua_path = root.."lualib/?.lua;lualib/?.lua"

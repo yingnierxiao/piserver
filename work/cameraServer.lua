@@ -30,18 +30,22 @@ function init( )
 			local data = capture("ls ./work/pics")
 
 			local fileList = split(data," ")
-			if #fileList> 0 then 
+			if #fileList> 1 then 
+				print("rm "..fileList[1])
 				os.execute("rm ./work/pics/"..fileList[1])
 			end
-			-- print("rm "..fileList[1])
-			local cmd = "curl --request POST --data-binary @./work/pics/%s --header 'U-ApiKey:406d8ea87de40f35bafe7d6f68cae8d4' http://api.yeelink.net/v1.0/device/5811/sensor/17062/photos"
-			cmd = string.format(cmd,fileList[2])
-			os.execute(cmd)
-			-- print(cmd)
+			-- print("lens",#fileList)
 			
-			skynet.sleep(1500)
+			if #fileList> 1 then 
+				local cmd = "curl --request POST --data-binary @./work/pics/%s --header 'U-ApiKey:406d8ea87de40f35bafe7d6f68cae8d4' http://api.yeelink.net/v1.0/device/5811/sensor/17062/photos"
+				cmd = string.format(cmd,fileList[2])
+				print(cmd)
+				os.execute(cmd)
+			end
+			
+			skynet.sleep(1000)
 		end
 	end)
 
-	os.execute("nohup mjpg_streamer -i 'input_uvc.so' -o 'output_file.so -f ./work/pics -d 15000' & ")
+	os.execute("mjpg_streamer -i 'input_uvc.so' -o 'output_file.so -f ./work/pics -d 15000' & ")
 end
