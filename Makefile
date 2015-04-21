@@ -17,7 +17,7 @@ $(MY_LUA_CLIB_PATH) :
 
 all : \
 	skynet \
-	$(foreach v, $(LUA_CLIB), $(MY_LUA_CLIB_PATH)/$(v).so) 
+	$(foreach v, $(LUA_CLIB), $(MY_LUA_CLIB_PATH)/$(v).so) \
 	GPIO \
 
 
