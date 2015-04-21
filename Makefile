@@ -8,7 +8,7 @@ MY_LUA_CLIB_PATH ?= skynet/luaclib
 
 CFLAGS = -g -O2 -Wall -I$(LUA_INC) $(MYCFLAGS) 
 
-LUA_CLIB = ul_time
+LUA_CLIB = 
 
 
 $(MY_LUA_CLIB_PATH) :

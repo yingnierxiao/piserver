@@ -51,6 +51,9 @@ end
 local Car = {}
 
 Car.__index = Car
+Car.CT_User = 0
+Car.CT_Auto = 1 
+
 
 function Car.new( is4Wheel )
     local obj = {}
@@ -92,8 +95,49 @@ function Car.new( is4Wheel )
     obj.pwmB:ChangeDutyCycle(90)
     --obj.pwmA:stop()
 
+    obj.waveTrigger = 11
+    obj.waveEcho = 12 
+
+    GPIO.setup(obj.waveTrigger ,GPIO.OUT) 
+    GPIO.setup(obj.waveEcho ,GPIO.IN)  
+
     return setmetatable(obj,Car)
 end
+
+function Car:getDistance()
+    return self.distance
+end
+
+function Car:loop( )
+    GPIO.output(self.waveTrigger, GPIO.LOW)
+    os.delay_s(0.5)
+    GPIO.output(self.waveTrigger, GPIO.HIGH)
+    os.delay_us(10)
+    GPIO.output(self.waveTrigger, GPIO.LOW)
+    local start 
+    local elapsed 
+    local stop
+
+    _,start = os.timeofday()
+    while GPIO.input(self.waveEcho)==GPIO.LOW do
+        _,start = os.timeofday()
+    end
+    while GPIO.input(self.waveEcho)==GPIO.HIGH do
+         _,stop = os.timeofday()
+    end
+    if stop < start then 
+        print(start,stop)
+        stop = stop + 1000000
+    end
+    elapsed = stop-start
+
+
+    self.distance = elapsed * 0.000001 * 34300 / 2
+    if self.distance < 0 then 
+        print(start,stop)
+    end
+end
+
 
 function Car:left( )
     self.fl:back()
@@ -191,6 +235,8 @@ end
 
 local function loop( ... )
     local time = skynet.time()
+
+    wifiCar:loop()
 
     if wifiCar.xspeed > 0 then
         wifiCar:right()

@@ -11,6 +11,7 @@ skynet.start(function()
 		nodelay = true,
 	})
 	print("Watchdog listen on ", 8888)
-	local dis = snax.uniqueservice("manDis")
+	snax.uniqueservice("manDis")
+	snax.uniqueservice("cameraServer")
 	skynet.exit()
 end)
