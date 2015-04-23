@@ -80,7 +80,7 @@ function Car.new( is4Wheel )
     }
     obj.pwmA = GPIO.newPWM(21,100)
     
-    obj.pwmA:start(50)
+    obj.pwmA:start(100)
     
     
     GPIO.setup {
@@ -90,10 +90,10 @@ function Car.new( is4Wheel )
     }
     obj.pwmB = GPIO.newPWM(19,100)
     
-    obj.pwmB:start(50)
+    obj.pwmB:start(100)
     
-    obj.pwmA:ChangeDutyCycle(90)
-    obj.pwmB:ChangeDutyCycle(90)
+    obj.pwmA:ChangeDutyCycle(100)
+    obj.pwmB:ChangeDutyCycle(100)
     --obj.pwmA:stop()
 
     obj.waveTrigger = 11
@@ -127,7 +127,7 @@ function Car:loop( )
          _,stop = os.timeofday()
     end
     if stop < start then 
-        print(start,stop)
+        print(start,stop,"A")
         stop = stop + 1000000
     end
     elapsed = stop-start
@@ -135,8 +135,11 @@ function Car:loop( )
 
     self.distance = elapsed * 0.000001 * 34300 / 2
     if self.distance < 0 then 
-        print(start,stop)
+        print(start,stop,"B")
     end
+
+    print(string.format("Distance : %.1f" ,self.distance))
+
 end
 
 
@@ -237,7 +240,7 @@ end
 local function loop( ... )
     local time = skynet.time()
 
-    -- wifiCar:loop()
+    wifiCar:loop()
 
     if wifiCar.xspeed > 0 then
         wifiCar:right()
