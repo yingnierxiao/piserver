@@ -40,6 +40,6 @@ case "$1"  in
 	
 
 	*)
-	./skynet/skynet work/config.server
+	sudo ./skynet/skynet work/config.server
 	;;
 esac

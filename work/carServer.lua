@@ -2,6 +2,7 @@ local skynet = require "skynet"
 
 local GPIO = require "GPIO"
 
+require("ul_time")
 
 local wifiCar
 
@@ -236,7 +237,7 @@ end
 local function loop( ... )
     local time = skynet.time()
 
-    wifiCar:loop()
+    -- wifiCar:loop()
 
     if wifiCar.xspeed > 0 then
         wifiCar:right()

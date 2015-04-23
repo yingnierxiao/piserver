@@ -7,3 +7,6 @@
 [submodule "3rd/wiringPi"]
 	path = 3rd/wiringPi
 	url = https://github.com/yingnierxiao/wiringPi.git
+[submodule "yingnierxiao"]
+	path = 3rd/lua-time
+	url = https://github.com/yingnierxiao/lua-time.git
