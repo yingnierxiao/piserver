@@ -13,5 +13,7 @@ skynet.start(function()
 	print("Watchdog listen on ", 8888)
 	snax.uniqueservice("carServer")
 	-- snax.uniqueservice("cameraServer")
+	skynet.newservice("findMe")
+
 	skynet.exit()
 end)
