@@ -37,7 +37,12 @@ case "$1"  in
 	fi
 	;;
 
-	
+	"-c")
+	echo "git push "
+	git add --all
+	git commit -m "ci"
+	git push origin master
+	;;
 
 	*)
 	sudo ./skynet/skynet work/config.server

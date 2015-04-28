@@ -38,9 +38,9 @@ local function loop()
 	if distance < 0 then 
 		print(start,stop)
 	end
-	print(string.format("Distance : %.1f" ,distance))
+	-- print(string.format("Distance : %.1f" ,distance))
 
-	skynet.timeout(10,loop) 
+	skynet.timeout(50,loop) 
 end
 
 function init( )

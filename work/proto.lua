@@ -20,8 +20,8 @@ handshake 1 {
 
 direction 1 {
 	request {
-		speedX 		0:interger 
-		speedY 		1:interger	
+		speedX 		0:integer 
+		speedY 		1:integer	
 	}
 }
 

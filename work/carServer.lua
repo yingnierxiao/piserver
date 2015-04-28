@@ -109,7 +109,7 @@ function Car:getDistance()
     return self.distance
 end
 
-function Car:loop( )
+function Car:loopDistance( )
     GPIO.output(self.waveTrigger, GPIO.LOW)
     os.delay_s(0.5)
     GPIO.output(self.waveTrigger, GPIO.HIGH)
@@ -120,6 +120,7 @@ function Car:loop( )
     local stop
 
     _,start = os.timeofday()
+    print(GPIO.input(self.waveEcho))
     while GPIO.input(self.waveEcho)==GPIO.LOW do
         _,start = os.timeofday()
     end
@@ -239,9 +240,9 @@ end
 
 local function loop( ... )
     local time = skynet.time()
-
-    wifiCar:loop()
-
+    -- print("dis A")
+    -- wifiCar:loopDistance()
+    -- print("dis B")
     if wifiCar.xspeed > 0 then
         wifiCar:right()
     elseif wifiCar.xspeed < 0 then
@@ -271,6 +272,7 @@ function exit( )
 end
 
 function init( )
+    GPIO.cleanup()
     GPIO.setwarnings(true)
     GPIO.setmode(GPIO.BOARD)  
 
